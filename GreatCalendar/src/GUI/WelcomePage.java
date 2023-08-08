@@ -5,7 +5,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,6 +33,22 @@ public class WelcomePage {
 		loginF.add(loginP);
 		loginP.setLayout(null);
 		
+		
+		try {
+		    // Load the image
+		    BufferedImage image = ImageIO.read(new File("C:/Users/Beggy/Pictures/dentistImage.jpg"));
+		    ImageIcon imageIcon = new ImageIcon(image);
+		
+		    // Create and set the image label
+		    JLabel imageLabel = new JLabel(imageIcon);
+		    imageLabel.setBounds(0, 0, 300, 220);
+		    loginP.add(imageLabel);
+		} catch (IOException e) {
+		    // Handle the exception
+		    e.printStackTrace();
+		}
+		
+        
 		//Stop program 
 		loginF.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
