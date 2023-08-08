@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -9,12 +10,14 @@ import java.util.Properties;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import System.Appointment;
 import System.Calendar;
 import System.Patient;
 
@@ -79,20 +82,37 @@ public class CalendarGUI {
 		
 	    btn.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent evt) {
-        				    		
+	    		
+	    		
 	    		date.setList(1, datePicker.getModel().getDay());
 	    		date.setList(2, datePicker.getModel().getMonth()+1);
 	    		date.setList(3, datePicker.getModel().getYear());
             	
             	if(date.getTime()!=1) {
-            		calendar.addAppointment(patient, date.getDate());
-            		if(bool) {
-            			EmployeeMenu.menuE(calendar);
+            		
+            		boolean notpossible = false;
+            		LocalDateTime dateTime = LocalDateTime.of((int)date.getDate().get(3), (int)date.getDate().get(2), (int)date.getDate().get(1), (int)date.getDate().get(0), 0);
+            		for (Appointment ap: calendar.getAppointments()) {
+            			if(dateTime.equals(ap.getDateTime())) {
+            				notpossible = true;
+            				
+            				break;
+            			}
             		}
-            		else {
-            			PatientMenu.menuP(patient, calendar);
+            		
+            		if (!notpossible) {
+            			calendar.addAppointment(patient, date.getDate());
+                		if(bool) {
+                			EmployeeMenu.menuE(calendar);
+                		}
+                		else {
+                			PatientMenu.menuP(patient, calendar);
+                		}
+                		frameC.dispose();
+            		} else {
+            			JOptionPane.showMessageDialog(null, "There is already an appointment at this date and time");
             		}
-            		frameC.dispose();
+            		
             	}else {
             		JFrame errorF = new JFrame("Error");
             		errorF.setSize(300,300);
