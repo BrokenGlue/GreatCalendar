@@ -41,7 +41,7 @@ public class CalendarGUI {
 		return this.date;
 	}
 
-	public static void calendarView(Patient patient, Calendar calendar) {
+	public static void calendarView(Patient patient, Calendar calendar, boolean bool) {
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		//                               CALENDAR
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -86,6 +86,13 @@ public class CalendarGUI {
             	
             	if(date.getTime()!=1) {
             		calendar.addAppointment(patient, date.getDate());
+            		if(bool) {
+            			EmployeeMenu.menuE(calendar);
+            		}
+            		else {
+            			PatientMenu.menuP(patient, calendar);
+            		}
+            		frameC.dispose();
             	}else {
             		JFrame errorF = new JFrame("Error");
             		errorF.setSize(300,300);

@@ -178,7 +178,7 @@ public class WelcomePage {
 		        }
 		        else {
 		        	Patient patient = calendar.getPatientList().get((calendar.getPatientList().size()-1));
-		        	CalendarGUI.calendarView(patient, calendar);
+		        	CalendarGUI.calendarView(patient, calendar, false);
 		        }
 
 		        regF.dispose();

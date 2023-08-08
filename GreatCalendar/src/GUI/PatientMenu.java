@@ -42,7 +42,7 @@ public class PatientMenu {
 		buttonCalendar.setBounds(100, 60, 150, 30);
 		buttonCalendar.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		    	CalendarGUI.calendarView(patient,calendar);
+		    	CalendarGUI.calendarView(patient,calendar,false);
 		    	frameP.dispose();
 		    }
 		});
