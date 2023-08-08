@@ -34,27 +34,29 @@ public class EmployeeMenu {
 		JButton buttonPatient = new JButton("Patient List");
 		buttonPatient.setBackground(Color.GRAY);
 		panelE.add(buttonPatient);
-		buttonPatient.setBounds(100, 30, 150, 30);
+		buttonPatient.setBounds(100, 10, 150, 30);
 		buttonPatient.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	printPatientList(calendar);
+		    	frameE.dispose();
 		    }
 		});
 		
 		JButton buttonAppointment = new JButton("Appointment List");
 		panelE.add(buttonAppointment);
 		buttonAppointment.setBackground(Color.GRAY);
-		buttonAppointment.setBounds(100, 60, 150, 30);
+		buttonAppointment.setBounds(100, 40, 150, 30);
 		buttonAppointment.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	printAppointmentList(calendar);
+		    	frameE.dispose();
 		    }
 		});
 		
 		JButton buttonCalendar = new JButton("New Appointment");
 		panelE.add(buttonCalendar);
 		buttonCalendar.setBackground(Color.GRAY);
-		buttonCalendar.setBounds(100, 90, 150, 30);
+		buttonCalendar.setBounds(100, 70, 150, 30);
 		buttonCalendar.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	checkName(calendar);
@@ -62,10 +64,21 @@ public class EmployeeMenu {
 		    }
 		});
 		
+		JButton buttoncancel = new JButton("Cancel Appointment");
+		panelE.add(buttoncancel);
+		buttoncancel.setBackground(Color.GRAY);
+		buttoncancel.setBounds(100, 100, 150, 30);
+		buttoncancel.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	cancelAppointment(calendar);
+		    	frameE.dispose();
+		    }
+		});
+		
 		JButton buttonlogout = new JButton("Logout");
 		panelE.add(buttonlogout);
 		buttonlogout.setBackground(Color.GRAY);
-		buttonlogout.setBounds(100, 120, 150, 30);
+		buttonlogout.setBounds(100, 130, 150, 30);
 		buttonlogout.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	Utility.logout(frameE,calendar);
@@ -161,7 +174,8 @@ public class EmployeeMenu {
  		btn.setBounds(90, 130, 150, 30);
  	    btn.addActionListener(new ActionListener() {
  	    	public void actionPerformed(ActionEvent evt) {
-         		frame.dispose();	    		
+         		frame.dispose();
+         		EmployeeMenu.menuE(calendar);
  	    	}
         });
  	    
@@ -205,7 +219,60 @@ public class EmployeeMenu {
  		btn.setBounds(90, 130, 150, 30);
  	    btn.addActionListener(new ActionListener() {
  	    	public void actionPerformed(ActionEvent evt) {
-         		frame.dispose();	    		
+         		frame.dispose();
+         		EmployeeMenu.menuE(calendar);
+ 	    	}
+        });
+ 	    
+ 		frame.setVisible(true);	
+	}
+	
+	public static void cancelAppointment(Calendar calendar) {
+		JFrame frame = new JFrame("Cancel Appointment");
+ 		frame.setSize(350, 200);
+ 				
+ 		JPanel panel = new JPanel();
+ 		frame.add(panel);
+ 		panel.setLayout(null);
+ 		
+ 		//Stop program 
+ 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 		
+ 		List<JButton> buttons = new ArrayList<JButton>();
+ 		
+ 		if (calendar.getAppointments().size() == 0) {
+ 			JLabel lab = new JLabel("Empty list", JLabel.CENTER);
+ 			lab.setBounds(50, 10, 250, 20);
+ 			panel.add(lab);
+ 		} else {
+	 		int i = 10;
+	 		for (Appointment ap: calendar.getAppointments()) {
+	 			String str = "Patient: " + ap.getPatient().getName() + " Time: " + ap.getDateTime();
+	 			JButton lab = new JButton(str);
+	 			lab.setBounds(50, i, 250, 20);
+	 			buttons.add(lab);
+	 			lab.addActionListener(new ActionListener() {
+	 	 	    	public void actionPerformed(ActionEvent evt) {
+	 	 	    		calendar.removeAppointment(ap.getPatient(), ap.getDateTime());
+	 	 	    		frame.dispose();
+	 	 	    		EmployeeMenu.menuE(calendar);
+	 	 	    	}
+	 	        });
+	 			i += 20;
+	 		}
+ 		}
+ 		
+ 		for (JButton lab: buttons) {
+ 			panel.add(lab);
+ 		}
+ 		
+ 		JButton cancel = new JButton("Go back");
+ 		panel.add(cancel);
+ 		cancel.setBounds(90, 130, 150, 30);
+ 	    cancel.addActionListener(new ActionListener() {
+ 	    	public void actionPerformed(ActionEvent evt) {
+         		frame.dispose();
+         		EmployeeMenu.menuE(calendar);
  	    	}
         });
  	    

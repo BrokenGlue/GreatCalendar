@@ -33,17 +33,18 @@ public class PatientMenu {
 		buttonPatient.setBackground(Color.GRAY);
 		panelE.add(buttonPatient);
 		
-		buttonPatient.setBounds(100, 30, 150, 30);
+		buttonPatient.setBounds(80, 30, 170, 30);
 		buttonPatient.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	myAppointments(calendar, patient);
+		    	frameP.dispose();
 		    }
 		});
 		
 		JButton buttonCalendar = new JButton("New Appointment");
 		panelE.add(buttonCalendar);
 		buttonCalendar.setBackground(Color.GRAY);
-		buttonCalendar.setBounds(100, 60, 150, 30);
+		buttonCalendar.setBounds(80, 60, 170, 30);
 		buttonCalendar.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	CalendarGUI.calendarView(patient,calendar,false);
@@ -51,10 +52,21 @@ public class PatientMenu {
 		    }
 		});
 		
+		JButton buttoncancel = new JButton("Cancel Appointment");
+		panelE.add(buttoncancel);
+		buttoncancel.setBackground(Color.GRAY);
+		buttoncancel.setBounds(80, 90, 170, 30);
+		buttoncancel.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	cancelAppointment(calendar, patient);
+		    	frameP.dispose();
+		    }
+		});
+		
 		JButton buttonlogout = new JButton("Logout");
 		panelE.add(buttonlogout);
 		buttonlogout.setBackground(Color.GRAY);
-		buttonlogout.setBounds(100, 90, 150, 30);
+		buttonlogout.setBounds(80, 120, 170, 30);
 		buttonlogout.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	Utility.logout(frameP,calendar);
@@ -107,7 +119,64 @@ public class PatientMenu {
  		btn.setBounds(90, 130, 150, 30);
  	    btn.addActionListener(new ActionListener() {
  	    	public void actionPerformed(ActionEvent evt) {
-         		frame.dispose();	    		
+         		frame.dispose();
+         		PatientMenu.menuP(patient, calendar);
+ 	    	}
+        });
+ 	    
+ 		frame.setVisible(true);	
+	}
+	
+	public static void cancelAppointment(Calendar calendar, Patient patient) {
+		JFrame frame = new JFrame("Cancel Appointment");
+ 		frame.setSize(350, 200);
+ 				
+ 		JPanel panel = new JPanel();
+ 		frame.add(panel);
+ 		panel.setLayout(null);
+ 		
+ 		//Stop program 
+ 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 		
+ 		List<JButton> buttons = new ArrayList<JButton>();
+ 		
+ 		boolean ex = false;
+ 		
+ 		int i = 10;
+ 		for (Appointment ap: calendar.getAppointments()) {
+ 			if (patient.getUsername().equals(ap.getPatient().getUsername())) {
+	 			JButton lab = new JButton(ap.getDateTime().toString());
+	 			lab.setBounds(50, i, 250, 20);
+	 			buttons.add(lab);
+	 			lab.addActionListener(new ActionListener() {
+	 	 	    	public void actionPerformed(ActionEvent evt) {
+	 	 	    		calendar.removeAppointment(patient, ap.getDateTime());
+	 	 	    		frame.dispose();
+	 	 	    		PatientMenu.menuP(patient, calendar);
+	 	 	    	}
+	 	        });
+	 			i += 20;
+	 			ex = true;
+ 			}
+ 		}
+ 		
+ 		if (!ex) {
+ 			JLabel lab = new JLabel("No appointments to cancel", JLabel.CENTER);
+ 			lab.setBounds(50, 10, 250, 20);
+ 			panel.add(lab);
+ 		} else {
+	 		for (JButton lab: buttons) {
+	 			panel.add(lab);	 			
+	 		}
+ 		}
+ 		
+ 		JButton cancel = new JButton("Go back");
+ 		panel.add(cancel);
+ 		cancel.setBounds(90, 130, 150, 30);
+ 	    cancel.addActionListener(new ActionListener() {
+ 	    	public void actionPerformed(ActionEvent evt) {
+         		frame.dispose();
+         		PatientMenu.menuP(patient, calendar);
  	    	}
         });
  	    
