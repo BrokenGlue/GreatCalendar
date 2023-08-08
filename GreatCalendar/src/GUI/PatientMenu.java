@@ -83,9 +83,9 @@ public class PatientMenu {
  		int i = 10;
  		for (Appointment ap: calendar.getAppointments()) {
  			if (patient.getUsername().equals(ap.getPatient().getUsername())) {
-	 			String str = "Patient: " + ap.getPatient().getName() + "Time: " + ap.getDateTime();
+	 			String str = "Time: " + ap.getDateTime();
 	 			JLabel lab = new JLabel(str, JLabel.CENTER);
-	 			lab.setBounds(125, i, 75, 20);
+	 			lab.setBounds(50, i, 250, 20);
 	 			labels.add(lab);
 	 			i += 20;
 	 			ex = true;
@@ -94,7 +94,7 @@ public class PatientMenu {
  		
  		if (!ex) {
  			JLabel lab = new JLabel("No appointments yet", JLabel.CENTER);
- 			lab.setBounds(75, 10, 150, 20);
+ 			lab.setBounds(50, 10, 250, 20);
  			labels.add(lab);
  		}
  		

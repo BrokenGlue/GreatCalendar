@@ -140,13 +140,13 @@ public class EmployeeMenu {
  		
  		if (calendar.getPatientList().size() == 0) {
  			JLabel lab = new JLabel("Empty list", JLabel.CENTER);
- 			lab.setBounds(125, 10, 75, 20);
+ 			lab.setBounds(50, 10, 250, 20);
  			labels.add(lab);
  		} else {
 	 		int i = 10;
 	 		for (Patient pa: calendar.getPatientList()) {
 	 			JLabel lab = new JLabel(pa.getName(), JLabel.CENTER);
-	 			lab.setBounds(125, i, 75, 20);
+	 			lab.setBounds(50, i, 250, 20);
 	 			labels.add(lab);
 	 			i += 20;
 	 		}
@@ -183,14 +183,14 @@ public class EmployeeMenu {
  		
  		if (calendar.getAppointments().size() == 0) {
  			JLabel lab = new JLabel("Empty list", JLabel.CENTER);
- 			lab.setBounds(125, 10, 75, 20);
+ 			lab.setBounds(50, 10, 250, 20);
  			labels.add(lab);
  		} else {
 	 		int i = 10;
 	 		for (Appointment ap: calendar.getAppointments()) {
-	 			String str = "Patient: " + ap.getPatient().getName() + "Time: " + ap.getDateTime();
+	 			String str = "Patient: " + ap.getPatient().getName() + " Time: " + ap.getDateTime();
 	 			JLabel lab = new JLabel(str, JLabel.CENTER);
-	 			lab.setBounds(125, i, 75, 20);
+	 			lab.setBounds(50, i, 250, 20);
 	 			labels.add(lab);
 	 			i += 20;
 	 		}
