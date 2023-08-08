@@ -149,24 +149,31 @@ public class EmployeeMenu {
  		//Stop program 
  		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  		
- 		List<JLabel> labels = new ArrayList<JLabel>();
+ 		List<JButton> buttons = new ArrayList<JButton>();
  		
  		if (calendar.getPatientList().size() == 0) {
- 			JLabel lab = new JLabel("Empty list", JLabel.CENTER);
+ 			JLabel lab = new JLabel("Empty list");
  			lab.setBounds(50, 10, 250, 20);
- 			labels.add(lab);
+ 			panel.add(lab);
  		} else {
 	 		int i = 10;
 	 		for (Patient pa: calendar.getPatientList()) {
-	 			JLabel lab = new JLabel(pa.getName(), JLabel.CENTER);
-	 			lab.setBounds(50, i, 250, 20);
-	 			labels.add(lab);
+	 			JButton button = new JButton(pa.getName());
+	 			button.setBounds(50, i, 250, 20);
+	 			buttons.add(button);
+	 			button.addActionListener(new ActionListener() {
+	 	 	    	public void actionPerformed(ActionEvent evt) {
+	 	         		frame.dispose();
+	 	         		profilePatient(calendar, pa);
+	 	 	    	}
+	 	        });
+	 			
 	 			i += 20;
 	 		}
  		}
  		
- 		for (JLabel lab: labels) {
- 			panel.add(lab);
+ 		for (JButton butt: buttons) {
+ 			panel.add(butt);
  		}
  		
  		JButton btn = new JButton("Ok");
@@ -277,5 +284,50 @@ public class EmployeeMenu {
         });
  	    
  		frame.setVisible(true);	
+	}
+	
+	public static void profilePatient(Calendar calendar, Patient patient) {
+		JFrame frame = new JFrame("Cancel Appointment");
+ 		frame.setSize(350, 200);
+ 				
+ 		JPanel panel = new JPanel();
+ 		frame.add(panel);
+ 		panel.setLayout(null);
+ 		
+ 		//Stop program 
+ 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 		
+ 		//Attributes patient
+ 		JLabel lab_name = new JLabel(patient.getName(), JLabel.CENTER);
+ 		lab_name.setBounds(50, 20, 250, 20);
+		panel.add(lab_name);
+		
+		JLabel lab_username = new JLabel(patient.getUsername(), JLabel.CENTER);
+		lab_username.setBounds(50, 40, 250, 20);
+		panel.add(lab_username);
+		
+		JLabel lab_email = new JLabel(patient.getEmail(), JLabel.CENTER);
+		lab_email.setBounds(50, 60, 250, 20);
+		panel.add(lab_email);
+		
+		JLabel lab_address = new JLabel(patient.getAddress(), JLabel.CENTER);
+		lab_address.setBounds(50, 80, 250, 20);
+		panel.add(lab_address);
+		
+		JLabel lab_telephone = new JLabel(patient.getTelephone(), JLabel.CENTER);
+		lab_telephone.setBounds(50, 100, 250, 20);
+		panel.add(lab_telephone);
+		
+		JButton cancel = new JButton("Go back");
+ 		panel.add(cancel);
+ 		cancel.setBounds(90, 130, 150, 30);
+ 	    cancel.addActionListener(new ActionListener() {
+ 	    	public void actionPerformed(ActionEvent evt) {
+         		frame.dispose();
+         		printPatientList(calendar);
+ 	    	}
+        });
+ 	    
+ 	    frame.setVisible(true);
 	}
 }
