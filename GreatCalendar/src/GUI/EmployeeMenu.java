@@ -22,7 +22,7 @@ public class EmployeeMenu {
 
 	public static void menuE(Calendar calendar) {
  		JFrame frameE = new JFrame("Options");
- 		frameE.setSize(350, 200);
+ 		frameE.setSize(350, 210);
  				
  		JPanel panelE = new JPanel();
  		frameE.add(panelE);
@@ -32,7 +32,6 @@ public class EmployeeMenu {
  		frameE.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JButton buttonPatient = new JButton("Patient List");
-		buttonPatient.setBackground(Color.GRAY);
 		panelE.add(buttonPatient);
 		buttonPatient.setBounds(100, 10, 150, 30);
 		buttonPatient.addActionListener(new ActionListener() {
@@ -44,7 +43,6 @@ public class EmployeeMenu {
 		
 		JButton buttonAppointment = new JButton("Appointment List");
 		panelE.add(buttonAppointment);
-		buttonAppointment.setBackground(Color.GRAY);
 		buttonAppointment.setBounds(100, 40, 150, 30);
 		buttonAppointment.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -55,7 +53,6 @@ public class EmployeeMenu {
 		
 		JButton buttonCalendar = new JButton("New Appointment");
 		panelE.add(buttonCalendar);
-		buttonCalendar.setBackground(Color.GRAY);
 		buttonCalendar.setBounds(100, 70, 150, 30);
 		buttonCalendar.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -66,7 +63,6 @@ public class EmployeeMenu {
 		
 		JButton buttoncancel = new JButton("Cancel Appointment");
 		panelE.add(buttoncancel);
-		buttoncancel.setBackground(Color.GRAY);
 		buttoncancel.setBounds(100, 100, 150, 30);
 		buttoncancel.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -77,7 +73,6 @@ public class EmployeeMenu {
 		
 		JButton buttonlogout = new JButton("Logout");
 		panelE.add(buttonlogout);
-		buttonlogout.setBackground(Color.GRAY);
 		buttonlogout.setBounds(100, 130, 150, 30);
 		buttonlogout.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -152,7 +147,7 @@ public class EmployeeMenu {
  		List<JButton> buttons = new ArrayList<JButton>();
  		
  		if (calendar.getPatientList().size() == 0) {
- 			JLabel lab = new JLabel("Empty list");
+ 			JLabel lab = new JLabel("Empty list", JLabel.CENTER);
  			lab.setBounds(50, 10, 250, 20);
  			panel.add(lab);
  		} else {

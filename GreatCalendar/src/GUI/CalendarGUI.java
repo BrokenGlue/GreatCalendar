@@ -60,7 +60,7 @@ public class CalendarGUI {
 		// =========================== DATE ===================================
 		JPanel panelDP = new JPanel();
 		//panelDP.setBounds(0, 0, 300, 37);
-		frameC.add(panelDP);
+
 		
 		UtilDateModel model = new UtilDateModel();
 
@@ -163,12 +163,30 @@ public class CalendarGUI {
 	    		date.setList(0, 16);
 	    	}
 	    });
+	    JPanel cancelP = new JPanel();
+	    cancelP.setBounds(0, 175, 300, 50);
+	    JButton cancel = new JButton("Go back");
+ 		cancelP.add(cancel);
+ 	    cancel.addActionListener(new ActionListener() {
+ 	    	public void actionPerformed(ActionEvent evt) {
+         		frameC.dispose();
+         		if(bool) {
+        			EmployeeMenu.menuE(calendar);
+        		}
+        		else {
+        			PatientMenu.menuP(patient, calendar);
+        		}
+ 	    	}
+        });
 	    
 	    panelDP.add(btn9);
 	    panelDP.add(btn10);
 	    panelDP.add(btn11);
 	    panelDP.add(btn3);
 	    panelDP.add(btn4);
+	    
+	    frameC.add(cancelP);
+		frameC.add(panelDP);
 	    
       	frameC.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       	frameC.setVisible(true);

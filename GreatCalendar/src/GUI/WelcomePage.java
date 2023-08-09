@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import System.Calendar;
@@ -25,23 +26,21 @@ public class WelcomePage {
 
 	//========================= LOGIN ========================================
 	public static void login(Calendar calendar){
-		JFrame loginF = new JFrame("Welcome to the Dentist Reservation System ");
-		loginF.setSize(300, 420);
+		JFrame loginF = new JFrame("Teethos");
+		loginF.setSize(300, 460);
 			
 		//Panel
 		JPanel loginP = new JPanel();
-		loginF.add(loginP);
-		loginP.setLayout(null);
+		loginP.setBounds(0,0,300,420);
 		
 		
 		try {
 		    // Load the image
-		    BufferedImage image = ImageIO.read(new File("C:/Users/Beggy/Pictures/dentistImage.jpg"));
+		    BufferedImage image = ImageIO.read(new File("C:/Users/Beggy/Pictures/dentistiImage3.jpg"));
 		    ImageIcon imageIcon = new ImageIcon(image);
 		
 		    // Create and set the image label
 		    JLabel imageLabel = new JLabel(imageIcon);
-		    imageLabel.setBounds(0, 0, 300, 220);
 		    loginP.add(imageLabel);
 		} catch (IOException e) {
 		    // Handle the exception
@@ -52,34 +51,32 @@ public class WelcomePage {
 		//Stop program 
 		loginF.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JLabel LabelUserLogin = new JLabel("USER LOGIN", JLabel.CENTER);
-		LabelUserLogin.setBounds(125, 230, 75, 20);
+		JLabel LabelUserLogin = new JLabel(" ============ USER LOGIN ============== ", JLabel.CENTER);
+		LabelUserLogin.setSize(300, 20);
 		loginP.add(LabelUserLogin);
 		
 		JLabel LabelUserName = new JLabel("User name: ", JLabel.LEFT);
-		LabelUserName.setBounds(5, 255, 100, 25);
 		LabelUserName.setFont(new Font("Arial", Font.BOLD, 12));
 		loginP.add(LabelUserName);
 		
+		JTextField userName = new JTextField(15);
+		loginP.add(userName);
+		
 		JLabel LabelPassword = new JLabel("Password: ", JLabel.LEFT);
-		LabelPassword.setBounds(5, 285, 180, 25);
 		LabelPassword.setFont(new Font("Arial", Font.BOLD, 12));
 		loginP.add(LabelPassword);
 		
-		//Login
-		JTextField userName = new JTextField(20);
-		userName.setBounds(75, 255, 180, 25);
-		loginP.add(userName);
-		
-		JTextField password = new JTextField(20);
-		password.setBounds(75, 285, 180, 25);
+		JPasswordField password = new JPasswordField(15);
 		loginP.add(password);
 		
+		JLabel label = new JLabel("===================================== ", JLabel.CENTER);
+		LabelUserLogin.setSize(300, 20);
+		loginP.add(label);
 		
 		// Login Button
+		
 		JButton userLogin = new JButton("Login");
-		userLogin.setBorder(null);
-		userLogin.setBounds(180, 340, 75, 20);
+		userLogin.setSize(50,30);
 		userLogin.setFont(new Font("Arial", Font.PLAIN, 8));
 		loginP.add(userLogin);
 		userLogin.setBackground(loginP.getBackground());
@@ -125,8 +122,7 @@ public class WelcomePage {
 		
   		// Register button
 		JButton createAccount = new JButton("Create account");
-  		createAccount.setBorder(null);
-  		createAccount.setBounds(75, 340, 75, 20);
+  		createAccount.setSize(50,30);
   		createAccount.setFont(new Font("Arial", Font.PLAIN, 8));
   		loginP.add(createAccount);
   		createAccount.setBackground(loginP.getBackground());
@@ -138,6 +134,7 @@ public class WelcomePage {
   			}
   		});
   		
+		loginF.add(loginP);
   		loginF.setVisible(true);
 	}
 	
@@ -163,7 +160,7 @@ public class WelcomePage {
 		//Text
 		JTextField name1 = new JTextField(15);
 		JTextField user1 = new JTextField(15);
-		JTextField password1 = new JTextField(15);
+		JPasswordField password1 = new JPasswordField(15);   
 		JTextField email1 = new JTextField(15);
 		JTextField add1 = new JTextField(15);
 		JTextField tel1 = new JTextField(15);
@@ -183,6 +180,23 @@ public class WelcomePage {
 		add1.setBounds(160, 170,200, 30);
 		tel1.setBounds(160, 210,200, 30 ); 
 	
+		JButton cancel = new JButton("Go back");
+		cancel.setBorder(null);
+ 		regP.add(cancel);
+ 		cancel.setBounds(50, 250, 100, 30);
+ 	    cancel.addActionListener(new ActionListener() {
+ 	    	public void actionPerformed(ActionEvent evt) {
+         		if(bool) {
+			        login(calendar);
+		        }
+		        else {
+		        	EmployeeMenu.menuE(calendar);
+		        }
+
+		        regF.dispose();
+ 	    	}
+        });
+		
 		//Button Registration
 		JButton buttonRegister = new JButton("Register");
 		buttonRegister.setBorder(null);

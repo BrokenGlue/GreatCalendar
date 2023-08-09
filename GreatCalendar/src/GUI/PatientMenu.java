@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ public class PatientMenu {
  		frameP.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JButton buttonPatient = new JButton("My appointments");
-		buttonPatient.setBackground(Color.GRAY);
 		panelE.add(buttonPatient);
 		
 		buttonPatient.setBounds(80, 30, 170, 30);
@@ -43,7 +41,6 @@ public class PatientMenu {
 		
 		JButton buttonCalendar = new JButton("New Appointment");
 		panelE.add(buttonCalendar);
-		buttonCalendar.setBackground(Color.GRAY);
 		buttonCalendar.setBounds(80, 60, 170, 30);
 		buttonCalendar.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -54,7 +51,6 @@ public class PatientMenu {
 		
 		JButton buttoncancel = new JButton("Cancel Appointment");
 		panelE.add(buttoncancel);
-		buttoncancel.setBackground(Color.GRAY);
 		buttoncancel.setBounds(80, 90, 170, 30);
 		buttoncancel.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -65,7 +61,6 @@ public class PatientMenu {
 		
 		JButton buttonlogout = new JButton("Logout");
 		panelE.add(buttonlogout);
-		buttonlogout.setBackground(Color.GRAY);
 		buttonlogout.setBounds(80, 120, 170, 30);
 		buttonlogout.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
